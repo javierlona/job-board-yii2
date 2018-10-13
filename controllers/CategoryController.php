@@ -4,10 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use yii\data\Pagination;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
 use app\models\Category;
 
 class CategoryController extends \yii\web\Controller
@@ -38,8 +34,10 @@ class CategoryController extends \yii\web\Controller
 
         if ($category->load(Yii::$app->request->post())) {
             if ($category->validate()) {
-                // form inputs are valid, do something here
-                return;
+                $category->save();
+//                Display message
+                Yii::$app->getSession()->setFlash('success', 'Category Added');
+                return $this->redirect('index.php?r=category');
             }
         }
 

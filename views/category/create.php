@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form ActiveForm */
 ?>
 <div class="category-create">
-
+    <h2 class="page-header">Add Category</h2>
     <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($category, 'name') ?>
