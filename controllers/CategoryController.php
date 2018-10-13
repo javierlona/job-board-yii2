@@ -34,7 +34,18 @@ class CategoryController extends \yii\web\Controller
 
     public function actionCreate()
     {
-        return $this->render('create');
+        $category = new Category();
+
+        if ($category->load(Yii::$app->request->post())) {
+            if ($category->validate()) {
+                // form inputs are valid, do something here
+                return;
+            }
+        }
+
+        return $this->render('create', [
+            'category' => $category,
+        ]);
     }
 
 }
