@@ -2,16 +2,31 @@
 
 namespace app\controllers;
 
+use Yii;
 use yii\data\Pagination;
 use app\models\Job;
-use app\models\Category;
 
 
 class JobController extends \yii\web\Controller
 {
     public function actionCreate()
     {
-        return $this->render('create');
+        $job = new Job();
+
+        if ($job->load(Yii::$app->request->post())) {
+            if ($job->validate()) {
+                // form inputs are valid
+                $job->save();
+
+                Yii::$app->getSession()->setFlash('success', 'Job Added');
+
+                return $this->redirect('index.php?r=job');
+            }
+        }
+
+        return $this->render('create', [
+            'job' => $job,
+        ]);
     }
 
     public function actionDelete()

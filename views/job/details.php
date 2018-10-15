@@ -30,7 +30,7 @@
         <strong>Contact Email: <?php echo $job->contact_email; ?></strong>
     </li>
     <li class="list-group-item">
-        <strong>Contact Email: <?php echo $job->contact_phone; ?></strong>
+        <strong>Contact Phone: <?php echo $job->contact_phone; ?></strong>
     </li>
 </ul>
 <a class="btn btn-primary" href="mailto:<?php echo $job->contact_email;
