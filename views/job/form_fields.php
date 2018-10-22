@@ -7,7 +7,8 @@ use yii\helpers\Html;
 <?= $form->field($job, 'category_id')
     ->dropDownList(Category::find()
         ->select(['name', 'id'])
-        ->orderBy('name ASC')
+        ->indexBy('id')
+        ->orderBy(['name' => SORT_ASC])
         ->column(), ['prompt' => 'Select Category']);
 ?>
 

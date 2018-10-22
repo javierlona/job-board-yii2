@@ -29,9 +29,12 @@ class JobController extends \yii\web\Controller
         ]);
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
-        return $this->render('delete');
+        $job = Job::findOne($id);
+        $job->delete();
+        Yii::$app->getSession()->setFlash('success', 'Job Deleted');
+        return $this->redirect('index.php?r=job');
     }
 
     public function actionEdit($id)

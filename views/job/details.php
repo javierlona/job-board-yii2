@@ -33,6 +33,9 @@
         <strong>Salary Range: <?php echo $job->salary_range; ?></strong>
     </li>
     <li class="list-group-item">
+        <strong>Requirements: <?php echo $job->requirements; ?></strong>
+    </li>
+    <li class="list-group-item">
         <strong>Contact Email: <?php echo $job->contact_email; ?></strong>
     </li>
     <li class="list-group-item">
