@@ -1,9 +1,15 @@
 <?php
-/* @var $this yii\web\View */
-?>
-<h1>job/edit</h1>
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $job app\models\Job */
+/* @var $form ActiveForm */
+?>
+<div class="job-edit">
+    <h2 class="page-header">Edit Job</h2>
+    <?php $form = ActiveForm::begin(); ?>
+    <?php include('form_fields.php'); ?>
+    <?php ActiveForm::end(); ?>
+</div><!-- job-edit -->
+
