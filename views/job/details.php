@@ -1,7 +1,13 @@
 <a href="/index.php?r=job">Back to Jobs</a>
 <h2 class="page-header"><?php echo $job->title; ?><small> in <?php echo $job->city . ', ' .
             $job->state;
-?></small></h2>
+?></small>
+    <span class="pull-right">
+        <a class="btn btn-default" href="index.php?r=job/edit&id=<?php echo $job->id; ?>">Edit</a>
+        <a class="btn btn-danger" href="index.php?r=job/delete&id=<?php echo $job->id; ?>">Delete</a>
+    </span>
+</h2>
+
 
 <div class="well">
     <h4>Job Description</h4>

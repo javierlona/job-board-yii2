@@ -9,7 +9,7 @@ use app\models\Category;
 /* @var $form ActiveForm */
 ?>
 <div class="job-create">
-
+<h2 class="page-header">Create Job</h2>
     <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($job, 'category_id')
