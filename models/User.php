@@ -38,6 +38,21 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['access_token' => $token]);
     }
 
+    public function rules()
+    {
+        return [
+            // the name, email, subject and body attributes are required
+            [['full_name', 'username', 'email', 'password', 'confirm_password'], 'required'],
+
+            // the email attribute should be a valid email address
+            ['email', 'email'],
+
+            // compare passwords
+            ['confirm_password', 'compare', 'compareAttribute' => 'password'],
+
+        ];
+    }
+
     /**
      * @return int|string current user ID
      */
@@ -61,5 +76,19 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = \Yii::$app->security->generateRandomString();
+            }
+            if(isset($this->password)) {
+                $this->password = \Yii::$app->getSecurity()->generatePasswordHash($this->password);
+            }
+            return true;
+        }
+        return false;
     }
 }

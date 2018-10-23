@@ -19,7 +19,9 @@ class UserController extends \yii\web\Controller
         if ($user->load(Yii::$app->request->post())) {
             if ($user->validate()) {
                 // form inputs are valid, do something here
-                return;
+                $user->save();
+                Yii::$app->getSession()->setFlash('success', 'Registration Successful!');
+                return $this->redirect('index.php');
             }
         }
 
