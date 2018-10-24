@@ -69,6 +69,28 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->auth_key;
     }
 
+    public function findByUsername($username)
+    {
+        return User::findOne(['username' => $username]);
+    }
+
+    /**
+     * @param string $password
+     * @return bool if password is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        $user = User::findByUsername($this->username);
+
+        if (\Yii::$app->getSecurity()->validatePassword($password, $user->password)) {
+            // all good, logging user in
+            return true;
+        } else {
+            // wrong password
+            return false;
+        }
+    }
+
     /**
      * @param string $authKey
      * @return bool if auth key is valid for current user
@@ -76,6 +98,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
+    }
+
+    public function getJob()
+    {
+        return $this->hasMany(Job::class, ['user_id' => 'id']);
     }
 
     public function beforeSave($insert)
