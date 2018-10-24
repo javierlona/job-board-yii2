@@ -5,9 +5,30 @@ namespace app\controllers;
 use Yii;
 use yii\data\Pagination;
 use app\models\Category;
+use yii\filters\AccessControl;
 
 class CategoryController extends \yii\web\Controller
 {
+    //    Access Control
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create'],
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+//                        'actions' => ['create', 'edit', 'delete'],
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied by default
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
 //        Create a query

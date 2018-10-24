@@ -5,10 +5,31 @@ namespace app\controllers;
 use Yii;
 use yii\data\Pagination;
 use app\models\Job;
+use yii\filters\AccessControl;
 
 
 class JobController extends \yii\web\Controller
 {
+//    Access Control
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'edit', 'delete'],
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+//                        'actions' => ['create', 'edit', 'delete'],
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied by default
+                ],
+            ],
+        ];
+    }
+
     public function actionCreate()
     {
         $job = new Job();
@@ -32,6 +53,12 @@ class JobController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $job = Job::findOne($id);
+
+        if(Yii::$app->user->identity->id != $job->user_id)
+        {
+            return $this->redirect('index.php?r=job');
+        }
+
         $job->delete();
         Yii::$app->getSession()->setFlash('success', 'Job Deleted');
         return $this->redirect('index.php?r=job');
@@ -40,6 +67,11 @@ class JobController extends \yii\web\Controller
     public function actionEdit($id)
     {
         $job = Job::findOne($id);
+
+        if(Yii::$app->user->identity->id != $job->user_id)
+        {
+            return $this->redirect('index.php?r=job');
+        }
 
         if ($job->load(Yii::$app->request->post())) {
             if ($job->validate()) {
