@@ -15,6 +15,8 @@ class CategoryController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                // Only allows logged in user to create categories because that is the only
+                // functionality we created for categories
                 'only' => ['create'],
                 'rules' => [
                     // allow authenticated users
@@ -31,10 +33,10 @@ class CategoryController extends \yii\web\Controller
 
     public function actionIndex()
     {
-//        Create a query
+        // Create a query
         $query = Category::find();
         $pagination = new Pagination([
-            'defaultPageSize' => 20,
+            'defaultPageSize' => 5,
             'totalCount' => $query->count()
         ]);
 
@@ -54,10 +56,11 @@ class CategoryController extends \yii\web\Controller
         $category = new Category();
 
         if ($category->load(Yii::$app->request->post())) {
-//            $category->create_date = time();
+            // Created the line below for use in SQLite DB
+            // $category->create_date = time();
             if ($category->validate()) {
                 $category->save();
-//                Display message
+                // Display message
                 Yii::$app->getSession()->setFlash('success', 'Category Added');
                 return $this->redirect('index.php?r=category');
             }

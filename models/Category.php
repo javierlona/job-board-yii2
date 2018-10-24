@@ -18,7 +18,10 @@ class Category extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%tbl_category}}';
+        // return '{{%tbl_category}}';
+        // If a table name is given as {{%TableName}}, then the percentage character % will be
+        // replaced with the table prefix. For example, {{%post}} becomes {{tbl_post}}.
+        return 'tbl_category';
     }
 
     /**
@@ -28,6 +31,8 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
+            // Safe is provided so that you can declare an attribute to be safe without actually
+            // validating it. In this case MySQL auto inserts it.
             [['create_date'], 'safe'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -36,12 +41,11 @@ class Category extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    // Displayed to end users in places such as form inputs and error messages
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'create_date' => 'Create Date',
+            'name' => 'Category Name',
         ];
     }
 

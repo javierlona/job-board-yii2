@@ -6,8 +6,11 @@ use yii\widgets\LinkPager;
 
 <ul class="list-group">
     <?php foreach ($categories as $category) : ?>
-        <li class="list-group-item"><a href="/index.php?r=job&category=<?php echo $category->id; ?>"><?php echo $category->name; ?></a></li>
+        <li class="list-group-item">
+            <a href="/index.php?r=job&category=<?php echo $category->id; ?>"><?php echo $category->name; ?></a>
+        </li>
     <?php endforeach; ?>
 </ul>
 
-<?php LinkPager::widget(['pagination' => $pagination]);
+<!-- Displays the pagination links -->
+<?php echo LinkPager::widget(['pagination' => $pagination]);

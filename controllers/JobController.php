@@ -22,6 +22,7 @@ class JobController extends \yii\web\Controller
                     [
                         'allow' => true,
 //                        'actions' => ['create', 'edit', 'delete'],
+//                    The @ corresponds to logged in users
                         'roles' => ['@'],
                     ],
                     // everything else is denied by default
