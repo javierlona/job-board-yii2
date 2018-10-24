@@ -2,7 +2,8 @@
 use yii\widgets\LinkPager;
 ?>
     <h2 class="page-header">Jobs <a class="btn btn-primary pull-right" href="/index
-.php?r=job/create">Create Job</a> </h2>
+.php?r=job/create">Create Job</a>
+    </h2>
 
 <?php if (!empty($jobs)) : ?>
     <ul class="list-group">
@@ -11,9 +12,11 @@ use yii\widgets\LinkPager;
             $phpdate = strtotime(($job->create_date));
             $formatted_date = date("F j, Y, g:i a", $phpdate);
             ?>
-            <li class="list-group-item"><a href="/index.php?r=job/details&id=<?php echo $job->id;
+            <li class="list-group-item">
+                <a href="/index.php?r=job/details&id=<?php echo $job->id;
                 ?>"><?php echo $job->title; ?></a> - <strong><?php echo $job->city . " " .
-                        $job->state . " </strong> - " . $formatted_date; ?></li>
+                        $job->state . " </strong> - " . $formatted_date; ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 
@@ -24,4 +27,4 @@ use yii\widgets\LinkPager;
 <?php endif; ?>
 
 
-<?php LinkPager::widget(['pagination' => $pagination]);
+<?php echo LinkPager::widget(['pagination' => $pagination]);

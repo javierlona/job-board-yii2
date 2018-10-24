@@ -21,8 +21,8 @@ class JobController extends \yii\web\Controller
                     // allow authenticated users
                     [
                         'allow' => true,
-//                        'actions' => ['create', 'edit', 'delete'],
-//                    The @ corresponds to logged in users
+                    // 'actions' => ['create', 'edit', 'delete'],
+                    // The @ corresponds to logged in users
                         'roles' => ['@'],
                     ],
                     // everything else is denied by default
@@ -37,6 +37,7 @@ class JobController extends \yii\web\Controller
 
         if ($job->load(Yii::$app->request->post())) {
             if ($job->validate()) {
+
                 // form inputs are valid
                 $job->save();
 
@@ -92,7 +93,7 @@ class JobController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        //        Create a query
+        // Create a query
         $query = Job::find();
         $pagination = new Pagination([
             'defaultPageSize' => 10,
@@ -104,20 +105,21 @@ class JobController extends \yii\web\Controller
             ->limit($pagination->limit)
             ->all();
 
+        // Display the jobs index page and pass the $jobs and $pagination objects
         return $this->render('index', [
             'jobs' => $jobs
             ,'pagination' => $pagination
         ]);
 
-        return $this->render('index');
     }
 
     public function actionDetails($id)
     {
-//        Return the individual job
+        // Return the individual job
         $job = Job::find()
             ->where(['id' => $id])
             ->one();
+        // Display the details page and pass the individual job object
         return $this->render('details', ['job' => $job]);
     }
 

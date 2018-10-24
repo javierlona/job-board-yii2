@@ -2,6 +2,7 @@
 <h2 class="page-header"><?php echo $job->title; ?><small> in <?php echo $job->city . ', ' .
             $job->state;
 ?></small>
+    <!-- Only the job creator can edit/delete the listed job -->
     <?php if((Yii::$app->user->id == $job->user_id)) : ?>
     <span class="pull-right">
         <a class="btn btn-default" href="index.php?r=job/edit&id=<?php echo $job->id; ?>">Edit</a>
@@ -44,6 +45,7 @@
         <strong>Contact Phone:</strong> <?php echo $job->contact_phone; ?>
     </li>
 </ul>
+
 <a class="btn btn-primary" href="mailto:<?php echo $job->contact_email;
-?>?Subject=Job%20Application">Contact
-    Employer</a>
+?>?Subject=Job%20Application">Contact Employer
+</a>
