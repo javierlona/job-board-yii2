@@ -2,7 +2,7 @@
 <h2 class="page-header"><?php echo $job->title; ?><small> in <?php echo $job->city . ', ' .
             $job->state;
 ?></small>
-    <?php if(Yii::$app->user->identity->id == $job->user_id) : ?>
+    <?php if((Yii::$app->user->id == $job->user_id)) : ?>
     <span class="pull-right">
         <a class="btn btn-default" href="index.php?r=job/edit&id=<?php echo $job->id; ?>">Edit</a>
         <a class="btn btn-danger" href="index.php?r=job/delete&id=<?php echo $job->id; ?>">Delete</a>

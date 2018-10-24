@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Job Board';
 ?>
 <div class="site-index">
     <div class="jumbotron">
@@ -10,7 +10,9 @@ $this->title = 'My Yii Application';
 
         <p class="lead">Browse our open job listings or find employees</p>
 
-        <p><a class="btn btn-lg btn-success" href="/jobs/index">Start Browsing</a> <a class="btn btn-lg btn-primary" href="/jobs/create">Create Listing</a></p>
+        <p><a class="btn btn-lg btn-success" href="/index
+.php?r=job/index">Start Browsing</a> <a class="btn btn-lg btn-primary" href="/index
+.php?r=job/create">Create Listing</a></p>
     </div>
 
     <div class="body-content">

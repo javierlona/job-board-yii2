@@ -54,6 +54,7 @@ class CategoryController extends \yii\web\Controller
         $category = new Category();
 
         if ($category->load(Yii::$app->request->post())) {
+//            $category->create_date = time();
             if ($category->validate()) {
                 $category->save();
 //                Display message
