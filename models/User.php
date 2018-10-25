@@ -8,7 +8,7 @@ use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
 {
-//    Add as a property b/c we don't need/want it in the database
+    // Add as a property b/c we don't need/want it in the database
     public $confirm_password;
 
     public static function tableName()
